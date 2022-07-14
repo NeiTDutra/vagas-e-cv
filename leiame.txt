@@ -1,0 +1,15 @@
+---- Configuração do Sistema ---
+1 - Abra o arquivo 'application.ini' na pasta 'app/config', altere os campos:
+application = <Título do sistema>
+site = <site para o link>
+nomecurto = <nome curto so sistema>
+
+2 - Para usuário administrador segue os dados de acesso:
+Usuário: adm
+Senha: admin1
+
+Usuário de currículo:
+Usuário: User
+Senha: user
+
+OBS: Caso tenha alguma dúvida para fazer rodar o sistema, entre em contato que posso auxiliar. Caso queira algum serviço a mais de ajustes podemos agendar e combinar valores.

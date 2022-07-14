@@ -1,0 +1,41 @@
+<!--[main]-->
+<link href="app/resources/styles.css?_ch={$dttime}" rel="stylesheet" type="text/css" media="screen" />
+<button id="tbutton_btn_salvar" name="btn_salvar" class="btn btn-sm btn-primary" onclick="Adianti.waitMessage = 'Carregando';__adianti_post_data('form_cand', 'class={$classe}&method=onPrint&id={$object->id}');return false;"><span>
+    <i style="padding-right:4px;;padding-right:4px" class="fa fa-print"></i>Imprimir</span>
+</button>
+<button id="tbutton_btn_salvar" name="btn_salvar" class="btn btn-sm btn-primary" onclick="Adianti.waitMessage = 'Carregando';__adianti_post_data('form_cand', 'class=ListaDeVagas');return false;"><span>
+    <i style="padding-right:4px;;padding-right:4px" class="fa fa-arrow-circle-o-left"></i>Voltar</span>
+</button>
+<table class="customform" style="width:100%">    
+    <tr>
+        <td align="right"><b>Vaga:</b></td>
+        <td><span class="formfield_1">{$object->id} - {$object->nome}</span></td>
+
+        <td><b>Solicitante:</b></td>
+        <td colspan="3"><span class="formfield_1">{$object->solicitante}</span></td>
+    </tr>
+</table>
+<table class="customform" style="width:100%">
+    <tr>
+        <td class="sectiontitle" colspan="5">Candidatos</td>
+    </tr>
+    <!--[candidatos]-->    
+    <tr bgcolor="#FFFCDD" style="border: 1px solid rgba(0, 0, 0, 0.5);">
+        <td align="left"><b>Nome</b></td>
+        <td align="center"><b>Cidade</b></td>
+        <td align="center"><b>Fone</b></td>
+        <td align="center"><b>celular</b></td>
+        <td align="center"><b>E-mail</b></td>
+    </tr>
+        <!--[details]-->
+        <tr>
+            <td align="left"><a href="index.php?class=ViewCurriculo&method=onReload&key={$id}&id={$id}">{$name}</a></td>
+            <td align="center">{$cidade}</td>
+            <td align="center">{$fone}</td>
+            <td align="center">{$celular}</td>
+            <td align="center">{$email}</td>
+        </tr>
+        <!--[/details]-->
+    <!--[/candidatos]-->
+</table>
+<!--[/main]-->

@@ -1,0 +1,222 @@
+<!--[main]-->
+<link href="app/resources/styles.css?_ch={$dttime}" rel="stylesheet" type="text/css" media="screen" />
+<button id="tbutton_btn_salvar" name="btn_salvar" class="btn btn-sm btn-primary"
+    onclick="Adianti.waitMessage = 'Carregando';__adianti_post_data('form_cv', 'class={$classe}&method=onPrint&id={$object->id}');return false;"><span>
+        <i style="padding-right:4px;;padding-right:4px" class="fa fa-print"></i>Imprimir</span>
+</button>
+<button id="tbutton_btn_salvar" name="btn_salvar" class="btn btn-sm btn-primary"
+    onclick="Adianti.waitMessage = 'Carregando';__adianti_post_data('form_cv', 'class={$classe}&method=onEnvEmail&id={$object->id}');return false;"><span>
+        <i style="padding-right:4px;;padding-right:4px" class="fa fa-envelope"></i>Enviar por E-mail</span>
+</button>
+<table class="customform" style="width:100%;">
+    <tr>
+        <td colspan="2" align="center" class="formtitle">Currículo</td>
+    </tr>
+    <tr>
+        <td width="100"><img src='{$foto}?_ch={$dttime}' style='width:100px; height: auto;border-radius:10%'
+                alt='Sem Foto' /></td>
+        <td>
+            <table style="width:100%;">
+                <tr>
+                    <td align="right" style="white-space: nowrap;" width="10%"><b>Nome Completo:</b></td>
+                    <td colspan="3"><span class="formfield_1">{$object->name}</span></td>
+                </tr>
+                <tr>
+                    <td align="right"><b>E-mail:</b></td>
+                    <td colspan="3"><span class="formfield_1">{$object->email}</span></td>
+                </tr>
+
+                <tr>
+                    <td align="right"><b>Telefone:</b></td>
+                    <td><span class="formfield_1">{$object->fone}</span></td>
+
+                    <td align="right"><b>Telemóvel:</b></td>
+                    <td><span class="formfield_1">{$object->celular}</span></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<table class="customform" style="width:100%">
+    <tr>
+        <td colspan="4" class="formtitle">Dados Pessoais</td>
+    </tr>
+    <tr>
+        <td width="15%" align="right"><b>NIF:</b></td>
+        <td width="35%"><span class="formfield_1">{$object->cpf}</span></td>
+
+        <td width="15%" align="right"><b>BI/Cartão Cidadão:</b></td>
+        <td width="35%"><span class="formfield_1">{$object->rg}</span></td>
+    </tr>
+
+    <tr>
+        <td align="right"><b>Gênero:</b></td>
+        <td><span class="formfield_1">{$object->sexo}</span></td>
+
+        <td align="right"><b>Data Nascimento:</b></td>
+        <td><span class="formfield_1">{$object->dtnasc}</span></td>
+    </tr>
+
+    <tr>
+        <td align="right"><b>Estado Civil:</b></td>
+        <td><span class="formfield_1">{$object->estcivil}</span></td>
+
+        <td align="right"><b>Carta de Condução:</b></td>
+        <td><span class="formfield_1">{$object->cnh}</span></td>
+    </tr>
+
+    <tr>
+        <td align="right"><b>Freguesia:</b></td>
+        <td colspan="3"><span class="formfield_1">{$object->endereco}</span></td>
+    </tr>
+
+    <tr>
+        <td align="right"><b>Código Postal:</b></td>
+        <td><span class="formfield_1">{$object->cep}</span></td>
+
+        <td align="right"><b>Morada:</b></td>
+        <td><span class="formfield_1">{$object->bairro}</span></td>
+    </tr>
+
+    <tr>
+        <td align="right"><b>Localidade:</b></td>
+        <td><span class="formfield_1">{$object->cidade}</span></td>
+
+        <td align="right"><b>Distrito/País:</b></td>
+        <td><span class="formfield_1">{$object->estado}</span> / <span class="formfield_1">{$object->pais}</span></td>
+    </tr>
+
+    <tr>
+        <td colspan="2" align="right"><b>Está empregado?</b></td>
+        <td colspan="2"><span class="formfield_1">{$object->estaempregado}</span></td>
+    </tr>
+
+    <tr>
+        <td colspan="2" align="right"><b>Disponibilidade para viajar?</b></td>
+        <td colspan="2"><span class="formfield_1">{$object->dispvia}</span></td>
+    </tr>
+
+    <tr>
+        <td colspan="2" align="right"><b>Disponibilidade para mudar de cidade?</b></td>
+        <td colspan="2"><span class="formfield_1">{$object->dispvia}</span></td>
+    </tr>
+
+    <tr>
+        <td align="right"><b>Necessidades Especiais:</b></td>
+        <td><span class="formfield_1">{$object->necespecial}</span></td>
+
+        <td align="right"><b>Qual?</b></td>
+        <td><span class="formfield_1">{$object->qualnecespecial}</span></td>
+    </tr>
+
+    <tr>
+        <td align="right" style="vertical-align:super;"><b>Cargo Pretendido:</b></td>
+        <td colspan="3"><span class="formfield_1">{$object->cargopretende}</span></td>
+    </tr>
+
+    <tr>
+        <td align="right" style="vertical-align:super;"><b>Objetivos:</b></td>
+        <td colspan="3"><span class="formfield_1">{$object->objetivo}</span></td>
+    </tr>
+</table>
+
+<!--[conhecimentos]-->
+<table class="customform" style="width:100%">
+    <tr>
+        <td class="sectiontitle" colspan="4">Conhecimentos</td>
+    </tr>
+    <!--[details]-->
+    <tr>
+        <td align="center" width="25%"><b>{$tec0}</b></td>
+        <td align="center" width="25%"><b>{$tec1}</b></td>
+        <td align="center" width="25%"><b>{$tec2}</b></td>
+        <td align="center" width="25%"><b>{$tec3}</b></td>
+    </tr>
+    <!--[/details]-->
+</table>
+<!--[/conhecimentos]-->
+
+<!--[idiomas]-->
+<table class="customform" style="width:100%">
+    <tr>
+        <td class="sectiontitle" colspan="5">Idiomas</td>
+    </tr>
+    <tr bgcolor="#FFFCDD" style="border: 1px solid rgba(0, 0, 0, 0.5);">
+        <td align="center"><b>Idioma</b></td>
+        <td align="center"><b>Compreensão</b></td>
+        <td align="center"><b>Escrita</b></td>
+        <td align="center"><b>Fala</b></td>
+        <td align="center"><b>Leitura</b></td>
+    </tr>
+    <!--[details]-->
+    <tr>
+        <td align="center">{$lingua}</td>
+        <td align="center">{$compreensao}</td>
+        <td align="center">{$escrita}</td>
+        <td align="center">{$fala}</td>
+        <td align="center">{$leitura}</td>
+    </tr>
+    <!--[/details]-->
+</table>
+<!--[/idiomas]-->
+
+<!--[formacao]-->
+<table class="customform" style="width:100%">
+    <tr>
+        <td class="sectiontitle" colspan="6">Formação</td>
+    </tr>
+    <!--[details]-->
+    <tr bgcolor="#FFFCDD" style="border: 1px solid rgba(0, 0, 0, 0.5);">
+        <td width="15%" align="right"><b>Curso:</b></td>
+        <td style="vertical-align:super;" colspan="5">{$curso}</td>
+    </tr>
+    <tr>
+        <td align="right"><b>Instituição:</b></td>
+        <td style="vertical-align:super;" colspan="5">{$instituicao}</td>
+    </tr>
+    <tr>
+        <td style="vertical-align:super;" align="right"><b>Tipo:</b></td>
+        <td style="vertical-align:super;" colspan="5">{$tipo}</td>
+    </tr>
+    <tr style="border-bottom: 1px; border-color: #3c8dbc;">
+        <td style="vertical-align:super;" align="right"><b>Início:</b></td>
+        <td align="center" style="vertical-align:super;">{$dtini}</td>
+        <td style="vertical-align:super;" align="right"><b>Final:</b></td>
+        <td align="center" style="vertical-align:super;">{$dtfim}</td>
+        <td style="vertical-align:super;" align="right"><b>Status:</b></td>
+        <td align="center" style="vertical-align:super;">{$status}</td>
+    </tr>
+    <!--[/details]-->
+</table>
+<!--[/formacao]-->
+
+<!--[experiencias]-->
+<table class="customform" style="width:100%">
+    <tr>
+        <td class="sectiontitle" colspan="6">Experiências</td>
+    </tr>
+    <!--[details]-->
+    <tr bgcolor="#FFFCDD" style="border: 1px solid rgba(0, 0, 0, 0.5);">
+        <td width="15%" align="right"><b>Empresa:</b></td>
+        <td style="vertical-align:super;" colspan="5">{$empresa}</td>
+    </tr>
+    <tr>
+        <td align="right"><b>Cargo:</b></td>
+        <td style="vertical-align:super;" colspan="5">{$cargo}</td>
+    </tr>
+    <tr>
+        <td style="vertical-align:super;" align="right"><b>Atividade:</b></td>
+        <td style="vertical-align:super;" colspan="5">{$atividade}</td>
+    </tr>
+    <tr style="border-bottom: 1px; border-color: #3c8dbc;">
+        <td style="vertical-align:super;" align="right"><b>Entrada:</b></td>
+        <td align="center" style="vertical-align:super;">{$dtini}</td>
+        <td style="vertical-align:super;" align="right"><b>Saída:</b></td>
+        <td align="center" style="vertical-align:super;">{$dtfim}</td>
+        <td style="vertical-align:super;" align="right"><b>Emp.Atual:</b></td>
+        <td align="center" style="vertical-align:super;">{$atual}</td>
+    </tr>
+    <!--[/details]-->
+</table>
+<!--[/experiencias]-->
+<!--[/main]-->
