@@ -1,0 +1,9 @@
+
+***Requisições***
+
+Preciso implantar o seguinte:
+
+[x]Pode excluir os curriculos cadastrados
+[x]Pode excluir vagas cadastradas
+[]Gerenciar os usuários e tipo de usuário
+[]Poder Criar mais de um usuário admin

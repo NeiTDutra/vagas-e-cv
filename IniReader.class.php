@@ -35,12 +35,12 @@ class IniReader
         $ini = $this->getContentOfIniFile($filename);
         return $this->readString($ini);
     }
-
-    public function readFile($filename, $param)
-    {
-        return $this->readFile($filename);
-    }
-
+    /**
+     * public function readFile($filename, $param)
+     * {
+     *     return $this->readFile($filename);
+     * }
+    */
     /**
      * Reads a INI configuration string and returns it as an array.
      *

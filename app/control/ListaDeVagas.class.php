@@ -92,7 +92,7 @@ class ListaDeVagas extends TPage
         $action2->setLabel(_t('Delete'));
         $action2->setImage('fa:trash-o red fa-lg');
         $action2->setField('id');
-        $action2->setDisplayCondition( array($this, 'MostraEditExc') );
+        //$action2->setDisplayCondition( array($this, 'MostraEditExc') );
 
         $action3 = new TDataGridAction(array('VisualizaCandidatos','onReload'));
         $action3->setLabel('Visualizar');
