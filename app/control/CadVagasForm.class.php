@@ -41,7 +41,7 @@ class CadVagasForm extends TPage
         $solicitante = new TEntry('solicitante');
         $email = new TEntry('email');
         $tipo = new TCombo('tipo');
-        $tipo->addItems(["Efetiva","Estágio"]);
+        $tipo->addItems(["Efetiva","Estágio","Plantão"]);
         $tipo->setValue(0);
 
         $nome->addValidation('Nome Vaga', new TRequiredValidator);

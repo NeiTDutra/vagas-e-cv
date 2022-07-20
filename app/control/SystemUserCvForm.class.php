@@ -77,6 +77,25 @@ class SystemUserCvForm extends TPage
         $dispmud->addItems(['SIM' => 'SIM', 'NÃO' => 'NÃO']);
         $estaempregado = new TCombo('estaempregado');
         $estaempregado->addItems(['SIM' => 'SIM', 'NÃO' => 'NÃO']);
+
+        // Modificado por nei.thomass@gmail.com
+        $diasdisponivel = new TCheckGroup('diasdisponivel');
+        $diasdisponivel->addItems( ['Domingo'=>'Domingo',
+                                    'Segunda-Feira'=>'Segunda-Feira',
+                                    'Terça-Feira'=>'Terça-Feira',
+                                    'Quarta-Feira'=>'Quarta-Feira',
+                                    'Quinta-Feira'=>'Quinta-Feira',
+                                    'Sexta-Feira'=>'Sexta-Feira',
+                                    'Sábado'=>'Sábado'] );
+
+        $turnosdisponivel = new TCheckGroup('turnosdisponivel');
+        $turnosdisponivel->addItems( ['Primeiro Turno'=>'Primeiro Turno',
+                                      'Segundo Turno'=>'Segundo Turno',
+                                      'Terceiro Turno'=>'Terceiro Turno',
+                                      'Normal'=>'Normal',
+                                      'Indiferente'=>'Indiferente'] );
+        // Fim da modificação por nei.thomass@gmail.com
+        
         $cnh = new TCombo('cnh');
         $cnh->addItems(['AB' => 'AB', 'A' => 'A', 'B' => 'B']);
         $necespecial = new TCombo('necespecial');
@@ -120,6 +139,9 @@ class SystemUserCvForm extends TPage
         $this->form->addFields( [ new TLabel('Estado:') ], [ $estado ] );
         $this->form->addFields( [ new TLabel('País:') ], [ $pais ] );
         $this->form->addFields( [ new TLabel('Dispon. Viagens:') ], [ $dispvia ], [ new TLabel('Dispon. Mudança:') ], [ $dispmud ], [ new TLabel('Está Empregado:') ], [ $estaempregado ] );
+        // Modificado por nei.thomass@gmail.com
+        $this->form->addFields( [ new TLabel('Dispon. Dias:') ], [ $diasdisponivel ], [ new TLabel('Dispon. Turnos:') ], [ $turnosdisponivel ] );
+        // Fim da modificação por nei.thomass@gmail.com
         $this->form->addFields( [ new TLabel('Necessidades Especiais:') ], [ $necespecial ], [ new TLabel('Qual?') ], [ $qualnecespecial ] );
         $this->form->addFields( [ new TLabel('Cargo Pretendido:') ], [ $cargopretende ] );
         $this->form->addFields( [ new TLabel('Objetivos:') ], [ $objetivo ] );        
@@ -145,6 +167,8 @@ class SystemUserCvForm extends TPage
         $pais->setSize('100%');
         $dispvia->setSize('100%');
         $dispmud->setSize('100%');
+        $diasdisponivel->setSize('100%');
+        $turnosdisponivel->setSize('100%');
         $estaempregado->setSize('100%');
         $cnh->setSize('100%');
         $objetivo->setSize('100%',50);

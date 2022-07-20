@@ -21,7 +21,7 @@ class TMail
      */
     function __construct()
     {
-        $this->pm = new PHPMailer(true);
+        $this->pm = new PHPMailer(false);
         
         $this->pm->SMTPOptions = array(
                 'ssl' => array(

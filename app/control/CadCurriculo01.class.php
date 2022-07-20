@@ -76,7 +76,7 @@ class CadCurriculo01 extends TPage
         $email = new TEntry('email');
         $email->setEditable(false);
         $cpf = new TEntry('cpf');
-        $cpf->setEditable(false);
+        $cpf->setEditable(true);
         $rg = new TEntry('rg');        
         $fone = new TEntry('fone');        
         $celular = new TEntry('celular');
@@ -161,6 +161,26 @@ class CadCurriculo01 extends TPage
         $dispmud->addItems([_t('Yes') => _t('Yes'), _t('No') => _t('No')]);
         $estaempregado = new TCombo('estaempregado');
         $estaempregado->addItems([_t('Yes') => _t('Yes'), _t('No') => _t('No')]);
+
+        // Modificado por nei.thomass@gmail.com
+        $diasdisponivel = new TCheckGroup('diasdisponivel');
+        // $diasdisponivel->setLayout('horizontal');
+        $diasdisponivel->addItems( ['Domingo'=>'Domingo',
+                                    'Segunda-Feira'=>'Segunda-Feira',
+                                    'Terça-Feira'=>'Terça-Feira',
+                                    'Quarta-Feira'=>'Quarta-Feira',
+                                    'Quinta-Feira'=>'Quinta-Feira',
+                                    'Sexta-Feira'=>'Sexta-Feira',
+                                    'Sábado'=>'Sábado'] );
+
+        $turnosdisponivel = new TCheckGroup('turnosdisponivel');
+        // $turnosdisponivel->setLayout('horizontal');
+        $turnosdisponivel->addItems( ['Primeiro Turno'=>'Primeiro Turno',
+                                      'Segundo Turno'=>'Segundo Turno',
+                                      'Terceiro Turno'=>'Terceiro Turno',
+                                      'Normal'=>'Normal',
+                                      'Indiferente'=>'Indiferente'] );
+        // Fim da modificação por nei.thomass@gmail.com
         
         $necespecial = new TCombo('necespecial');
         $necespecial->addItems([_t('Yes') => _t('Yes'), _t('No') => _t('No')]);
@@ -185,6 +205,9 @@ class CadCurriculo01 extends TPage
         $this->form->addFields( [ new TLabel('* '._t('District').':') ], [ $bairro ], [ new TLabel('* '._t('City').':') ], [ $cidade ] );
         $this->form->addFields( [ new TLabel('* '._t('State').':') ], [ $estado ], [ new TLabel('* '._t('Country').':') ], [ $pais ] );
         $this->form->addFields( [ new TLabel('* '._t('Travel Availability').':') ], [ $dispvia ], [ new TLabel('* '._t('Availability Changes').':') ], [ $dispmud ], [ new TLabel('* '._t('Is employed').':') ], [ $estaempregado ] );
+        // Modificado por nei.thomass@gmail.com
+        $this->form->addFields( [ new TLabel('* Dispon. Dias:') ], [ $diasdisponivel ], [ new TLabel('* Dispon. Turnos:') ], [ $turnosdisponivel ] );
+        // Fim da modificação por nei.thomass@gmail.com
         $this->form->addFields( [ new TLabel('* '._t('Special needs').':') ], [ $necespecial ], [ new TLabel(_t('What').'?') ], [ $qualnecespecial ] );
         $this->form->addFields( [ new TLabel(_t('Intended position')) ], [ $cargopretende ] );
         $this->form->addFields( [ new TLabel(_t('Objectives')) ], [ $objetivo ] );
@@ -207,6 +230,8 @@ class CadCurriculo01 extends TPage
         $pais->setSize('100%');
         $dispvia->setSize('100%');
         $dispmud->setSize('100%');
+        $diasdisponivel->setSize('100%');
+        $turnosdisponivel->setSize('100%');
         $estaempregado->setSize('100%');
         $cnh->setSize('100%');
         $objetivo->setSize('100%',50);
@@ -231,6 +256,10 @@ class CadCurriculo01 extends TPage
         $necespecial->addValidation( _t('Special needs'), new TRequiredValidator );
         $dispvia->addValidation( _t('Travel Availability'), new TRequiredValidator );
         $dispmud->addValidation( _t('Availability Changes'), new TRequiredValidator );
+        // Adicionado por nei.thomass@gmail.com
+        $diasdisponivel->addValidation( '* Dispon. Dias:', new TRequiredValidator );
+        $turnosdisponivel->addValidation( '* Dispon. Turnos:', new TRequiredValidator );
+        // Fim da adição
         $estaempregado->addValidation( _t('Is employed'), new TRequiredValidator );
          
         // create the form actions
@@ -263,10 +292,14 @@ class CadCurriculo01 extends TPage
             **/
             
             $this->form->validate(); // validate form data
-            $data = $this->form->getData(); // get form data as array            
+            $data = $this->form->getData(); // get form data as array 
             
             $object = new SystemUser;
             $object->fromArray( (array) $data); // load the object with data
+            // Adicionando por nei.thomass@gmail.com
+            $object->diasdisponivel = implode('|',$data->diasdisponivel);
+            $object->turnosdisponivel = implode('|',$data->turnosdisponivel);
+            // Fim adição
             if ($object->id > 0) {
                 $object->dtatualiza = date("Y-m-d H:i:s");
             }

@@ -52,11 +52,32 @@ class ListagemCurriculos  extends TPage
         $idade = new TEntry('idade');
         $idade->setMask('99');
 
+        // Adicionado por nei.thomass@gmail.com
+        $diasdisponivel = new TCombo('diasdisponivel');
+        $diasdisponivel->addItems( ['Domingo' => 'Domingo',
+                                    'Segunda-Feira' => 'Segunda-Feira',
+                                    'Terça-Feira' => 'Terça-Feira',
+                                    'Quarta-Feira' => 'Quarta-Feira',
+                                    'Quinta-Feira' => 'Quinta-Feira',
+                                    'Sexta-Feira' => 'Sexta-Feira',
+                                    'Sábado' => 'Sábado'] );
+
+        $turnosdisponivel = new TCombo('turnosdisponivel');
+        $turnosdisponivel->addItems( ['Primeiro Turno' => 'Primeiro Turno',
+                                      'Segundo Turno'=>'Segundo Turno',
+                                      'Terceiro Turno'=>'Terceiro Turno',
+                                      'Normal'=>'Normal',
+                                      'Indiferente'=>'Indiferente'] );
+        // Fim da adição
+
         // add the fields
         $this->form->addFields( [ new TLabel('Conhecimento:') ], [ $plchave ], [ new TLabel('Código:') ], [ $id ] , [ new TLabel('Nome:') ], [ $name ] );
         $this->form->addFields( [ new TLabel(_t('Phone').':') ], [ $fone ], [ new TLabel(_t('Cell Phone').':') ], [ $celular ], [ new TLabel(_t('CPF').':') ], [ $cpf ] );
         $this->form->addFields( [ new TLabel(_t('Genre').':') ], [ $sexo ], [ new TLabel(_t('CNH').':') ], [ $cnh ], [ new TLabel(_t('City').':') ], [ $cidade ] );
         $this->form->addFields( [ new TLabel(_t('District').':') ], [ $bairro ], [ new TLabel('Cargo Pret.:') ], [ $cargopretende ], [new TLabel('Idade:')], [$idade] );
+        // Adicionado por nei.thomass@gmail.com
+        $this->form->addFields( [ new TLabel('Dispon. Dias:') ], [ $diasdisponivel ], [ new TLabel('Dispon. Turnos:') ], [ $turnosdisponivel ] );
+        // Fim da adição
 
         // set sizes
         $plchave->setSize('100%');
@@ -193,6 +214,9 @@ class ListagemCurriculos  extends TPage
         TSession::setValue('Listagem _filter_bairro',   NULL);
         TSession::setValue('Listagem _filter_cargopretende',   NULL);
         TSession::setValue('Listagem _filter_idade',   NULL);
+        // Adicionado por nei.thomass@gmail.com
+        TSession::setValue('Listagem _filter_diasdisponivel', NULL);
+        TSession::setValue('Listagem _filter_turnosdisponivel', NULL);
 
         if (isset($data->id) AND ($data->id)) {
             $filter = new TFilter('id', '=', "$data->id"); // create the filter
@@ -258,6 +282,18 @@ class ListagemCurriculos  extends TPage
                                   ') As Integer))', '=', "{$data->idade}"); // create the filter
             TSession::setValue('Listagem _filter_idade',   $filter); // stores the filter in the session
         }
+
+        // Adicionado por nei.thomass@gmail.com
+        if (isset($data->diasdisponivel) AND ($data->diasdisponivel)) {
+            $filter = new TFilter('diasdisponivel', 'like', "%{$data->diasdisponivel}%");
+            TSession::setValue('Listagem _filter_diasdisponivel',   $filter); 
+        }
+
+        if (isset($data->turnosdisponivel) AND ($data->turnosdisponivel)) {
+            $filter = new TFilter('turnosdisponivel', 'like', "%{$data->turnosdisponivel}%");
+            TSession::setValue('Listagem _filter_turnosdisponivel',   $filter); 
+        }
+        // Fim da adição
 
         // fill the form with data again
         $this->form->setData($data);
@@ -345,6 +381,16 @@ class ListagemCurriculos  extends TPage
             if (TSession::getValue('Listagem _filter_idade')) {
                 $criteria->add(TSession::getValue('Listagem _filter_idade')); // add the session filter
             }
+
+            // Adicinado por nei.thomass@gmail.com
+            if (TSession::getValue('Listagem _filter_diasdisponivel')) {
+                $criteria->add(TSession::getValue('Listagem _filter_diasdisponivel'));
+            }
+
+            if (TSession::getValue('Listagem _filter_turnosdisponivel')) {
+                $criteria->add(TSession::getValue('Listagem _filter_turnosdisponivel'));
+            }
+            // Fim da adição
 
             // load the objects according to criteria
             $objects = $repository->load($criteria, FALSE);

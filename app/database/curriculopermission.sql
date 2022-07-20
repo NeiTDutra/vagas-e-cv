@@ -59,6 +59,15 @@ INSERT INTO system_program (id,name,controller) VALUES ('45','Cad Curriculo02','
 INSERT INTO system_program (id,name,controller) VALUES ('46','Cad Curriculo03','CadCurriculo03');
 INSERT INTO system_program (id,name,controller) VALUES ('47','Cad Curriculo04','CadCurriculo04');
 
+CREATE TABLE system_unit (
+    id INTEGER PRIMARY KEY NOT NULL,
+    name varchar(100));
+
+CREATE TABLE system_preference (
+    id text,
+    value text
+);
+
 CREATE TABLE system_user (
     id INTEGER PRIMARY KEY NOT NULL,
     name varchar(100),
@@ -99,8 +108,16 @@ CREATE TABLE system_user (
     FOREIGN KEY(frontpage_id) REFERENCES system_program(id));
 
 INSERT INTO system_user (id,name,login,password,email,frontpage_id,system_unit_id,active,cpf,rg,fone,celular,sexo,dtnasc,estcivil,endereco,bairro,cep,cidade,estado,pais,dispvia,dispmud,diasdisponivel,turnosdisponivel,estaempregado,cnh,objetivo,pretsalarial,arquivo,status,necespecial,qualnecespecial,cargopretende,dtcriacao,dtatualiza) VALUES ('1','Super Administrator','admin','4594ea97fcd2fedcab7b1c39ee3d707e','willian.wagner@.com.br','10',NULL,'Y','040.433.539-01','414101','(48)3444-5555','(48)99647-4848','Masculino','26/11/1982','Casado','teste','teste','88813-160','Criciúma','SC','Brasil','SIM','SIM',NULL,NULL,'SIM','AB','teste','15225',NULL,'F','NÃO',NULL,NULL,'2019-02-18 23:02:28','2019-04-11 19:17:18');
-INSERT INTO system_user (id,name,login,password,email,frontpage_id,system_unit_id,active,cpf,rg,fone,celular,sexo,dtnasc,estcivil,endereco,bairro,cep,cidade,estado,pais,dispvia,dispmud,diasdisponivel,turnosdisponivel,estaempregado,cnh,objetivo,pretsalarial,arquivo,status,necespecial,qualnecespecial,cargopretende,dtcriacao,dtatualiza) VALUES ('4','Administrador','adm','e00cf25ad42683b3df678c61f42c6bda','will.wag@gmail.com','38',NULL,'Y',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2019-02-21 23:02:28','2019-02-21 23:02:28');
+INSERT INTO system_user (id,name,login,password,email,frontpage_id,system_unit_id,active,cpf,rg,fone,celular,sexo,dtnasc,estcivil,endereco,bairro,cep,cidade,estado,pais,dispvia,dispmud,diasdisponivel,turnosdisponivel,estaempregado,cnh,objetivo,pretsalarial,arquivo,status,necespecial,qualnecespecial,cargopretende,dtcriacao,dtatualiza) VALUES ('4','Administrador','adm','e00cf25ad42683b3df678c61f42c6bda','will.wag@gmail.com','38',NULL,'Y',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2019-02-21 23:02:28','2019-02-21 23:02:28');
 INSERT INTO system_user (id,name,login,password,email,frontpage_id,system_unit_id,active,cpf,rg,fone,celular,sexo,dtnasc,estcivil,endereco,bairro,cep,cidade,estado,pais,dispvia,dispmud,diasdisponivel,turnosdisponivel,estaempregado,cnh,objetivo,pretsalarial,arquivo,status,necespecial,qualnecespecial,cargopretende,dtcriacao,dtatualiza) VALUES ('5','William O Wagner','User','ee11cbb19052e40b07aac0ca060c23ee','will.wag@gmail.com','44',NULL,'Y','000.000.000-00','00000000','(48)9963-7960','(48)99637-9600','Masculino','26/02/2020','Casado','Rua Aracajú, 235, Casa','Brasil','88813160','Criciúma','SC','Brasil','SIM','SIM',NULL,NULL,'SIM','AB','Ser o melhor da empresa.',NULL,NULL,'F','NÃO',NULL,'CEO','2020-02-05 22:00:30','2020-02-05 22:08:32');
+INSERT INTO system_user (id,name,login,password,email,frontpage_id,system_unit_id,active,cpf,rg,fone,celular,sexo,dtnasc,estcivil,endereco,bairro,cep,cidade,estado,pais,dispvia,dispmud,diasdisponivel,turnosdisponivel,estaempregado,cnh,objetivo,pretsalarial,arquivo,status,necespecial,qualnecespecial,cargopretende,dtcriacao,dtatualiza) VALUES ('6','Sadmin','Sadmin'.'0d05b909c125e1cd72b3823a48e02a59','admin@mail.com','10',NULL,'Y','987.987.789-00','12345678','(51)2345-6789','(51)99876-5544','Masculino','14/07/1989','Solteiro','rua Tendas, 234, Casa','teste','94555000','Capão da Canoa','RS','Brasil','SIM','SIM',NULL,NULL,'SIM','AB','teste','15678',NULL,'F','NÃO',NULL,NULL,'2019-02-18 23:02:28','2019-04-11 19:17:18');
+
+CREATE TABLE system_user_unit (
+    id INTEGER PRIMARY KEY NOT NULL,
+    system_user_id int,
+    system_unit_id int,
+    FOREIGN KEY(system_user_id) REFERENCES system_user(id),
+    FOREIGN KEY(system_unit_id) REFERENCES system_unit(id));
 
 CREATE TABLE system_user_group (
     id INTEGER PRIMARY KEY NOT NULL,
@@ -108,11 +125,7 @@ CREATE TABLE system_user_group (
     system_group_id int,
     FOREIGN KEY(system_user_id) REFERENCES system_user(id),
     FOREIGN KEY(system_group_id) REFERENCES system_group(id));
-
-INSERT INTO system_user_group (id,system_user_id,system_group_id) VALUES ('11','1','1');
-INSERT INTO system_user_group (id,system_user_id,system_group_id) VALUES ('12','4','3');
-INSERT INTO system_user_group (id,system_user_id,system_group_id) VALUES ('13','5','2');
-
+    
 CREATE TABLE system_group_program (
     id INTEGER PRIMARY KEY NOT NULL,
     system_group_id int,
@@ -183,40 +196,10 @@ CREATE TABLE system_user_program (
     system_program_id int,
     FOREIGN KEY(system_user_id) REFERENCES system_user(id),
     FOREIGN KEY(system_program_id) REFERENCES system_program(id));
-
-CREATE TABLE system_unit (
-    id INTEGER PRIMARY KEY NOT NULL,
-    name varchar(100));
-
-CREATE TABLE system_preference (
-    id text,
-    value text
-);
-
-INSERT INTO system_preference (id,value) VALUES ('mail_from',NULL);
-INSERT INTO system_preference (id,value) VALUES ('smtp_auth','1');
-INSERT INTO system_preference (id,value) VALUES ('smtp_host',NULL);
-INSERT INTO system_preference (id,value) VALUES ('smtp_port','587');
-INSERT INTO system_preference (id,value) VALUES ('smtp_user','curriculos');
-INSERT INTO system_preference (id,value) VALUES ('smtp_pass','cur@2019agro');
-INSERT INTO system_preference (id,value) VALUES ('mail_support',NULL);
-
-CREATE TABLE system_user_unit (
-    id INTEGER PRIMARY KEY NOT NULL,
-    system_user_id int,
-    system_unit_id int,
-    FOREIGN KEY(system_user_id) REFERENCES system_user(id),
-    FOREIGN KEY(system_unit_id) REFERENCES system_unit(id));
-
+  
 CREATE TABLE experiencias(
   id INT PRIMARY KEY NOT NULL, 
   empresa TEXT, cargo TEXT, dtini TEXT, dtfim TEXT, atividade TEXT, id_user INT, atual TEXT);
-
-INSERT INTO experiencias (id,empresa,cargo,dtini,dtfim,atividade,id_user,atual) VALUES ('1','Empresa','Cargo','06/03/2017',NULL,'Atividades
-Atividades
-Atividades
-Atividades
-Atividades','5','SIM');
 
 CREATE TABLE formacao (
 	id INTEGER PRIMARY KEY  NOT NULL,
@@ -229,8 +212,6 @@ CREATE TABLE formacao (
 	id_user INT
 );
 
-INSERT INTO formacao (id,curso,instituicao,status,tipo,dtini,dtfim,id_user) VALUES ('1','Sistemas de Informação','ESUCRI','Completo','Graduação','01/02/2002','15/12/2006','5');
-
 CREATE TABLE idiomas (
 	id INTEGER PRIMARY KEY  NOT NULL,
 	lingua TEXT,
@@ -241,58 +222,16 @@ CREATE TABLE idiomas (
 	id_user INT
 );
 
-INSERT INTO idiomas (id,lingua,compreensao,escrita,fala,leitura,id_user) VALUES ('1','Português','Avançado','Avançado','Avançado','Avançado','5');
-INSERT INTO idiomas (id,lingua,compreensao,escrita,fala,leitura,id_user) VALUES ('2','Inglês','Básico','Básico','Básico','Básico','5');
-
 CREATE TABLE tipos (
 	id INTEGER PRIMARY KEY  NOT NULL,
 	descricao TEXT
 , sigla TEXT);
-
-INSERT INTO tipos (id,descricao,sigla) VALUES ('1','Progress','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('2','Java','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('3','Javascript','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('4','HTML 5','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('5','CSS','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('6','PHP','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('7','Delphi','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('8','Linux','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('9','Manutenção S.O.','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('10','Pacote Office','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('11','Actionscript (flex builder)','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('12','IONIC','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('13','Rede','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('14','Windows','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('15','Hardware','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('16','Inst. de Software','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('17','jQuery','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('18','Internet','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('19','Mysql','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('20','PostgreSql','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('21','Oracle','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('22','MariaDB','TEC');
-INSERT INTO tipos (id,descricao,sigla) VALUES ('23','Firebird','TEC');
 
 CREATE TABLE user_tipos (
 	id INTEGER PRIMARY KEY  NOT NULL,
 	id_user int,
 	id_tipo int
 );
-
-INSERT INTO user_tipos (id,id_user,id_tipo) VALUES ('1','5','1');
-INSERT INTO user_tipos (id,id_user,id_tipo) VALUES ('2','5','2');
-INSERT INTO user_tipos (id,id_user,id_tipo) VALUES ('3','5','3');
-INSERT INTO user_tipos (id,id_user,id_tipo) VALUES ('4','5','4');
-INSERT INTO user_tipos (id,id_user,id_tipo) VALUES ('5','5','5');
-INSERT INTO user_tipos (id,id_user,id_tipo) VALUES ('6','5','6');
-INSERT INTO user_tipos (id,id_user,id_tipo) VALUES ('7','5','8');
-INSERT INTO user_tipos (id,id_user,id_tipo) VALUES ('8','5','12');
-INSERT INTO user_tipos (id,id_user,id_tipo) VALUES ('9','5','15');
-INSERT INTO user_tipos (id,id_user,id_tipo) VALUES ('10','5','17');
-INSERT INTO user_tipos (id,id_user,id_tipo) VALUES ('11','5','18');
-INSERT INTO user_tipos (id,id_user,id_tipo) VALUES ('12','5','19');
-INSERT INTO user_tipos (id,id_user,id_tipo) VALUES ('13','5','20');
-INSERT INTO user_tipos (id,id_user,id_tipo) VALUES ('14','5','22');
 
 CREATE TABLE vagas (
 	id INTEGER,
@@ -308,8 +247,6 @@ CREATE TABLE vagas (
 	status INTEGER, solicitante TEXT, tipo INTEGER,
 	CONSTRAINT vagas_PK PRIMARY KEY (id)
 );
-
-INSERT INTO vagas (id,nome,descricao,conhecimento,prerequisito,salario,beneficio,datacriacao,datafinal,status,solicitante,tipo) VALUES ('1','Desenvolvedor de Software','Desenvolver as atividade passadas.','Lógica de programação e PHP.','Saber programar','4000','Vale Alimentação','2020-02-05','2020-03-05','1','EU','0');
 
 CREATE TABLE vaga_user (
 	id INTEGER,

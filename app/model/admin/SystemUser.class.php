@@ -49,6 +49,10 @@ class SystemUser extends TRecord
         parent::addAttribute('pais');
         parent::addAttribute('dispvia');
         parent::addAttribute('dispmud');
+        // modifiicado por nei.thomass@gmail.com
+        parent::addAttribute('diasdisponivel');
+        parent::addAttribute('turnosdisponivel');
+        // fim modificação
         parent::addAttribute('estaempregado');
         parent::addAttribute('cnh');
         parent::addAttribute('objetivo');

@@ -8,7 +8,7 @@ class VisualizaCv extends TPage {
         parent::__construct();
         
         // create the HTML Renderer
-        if (LANG == 'pt_pt') { // Estados do brasil
+        if (LANG == 'pt_pt') { 
             $this->html = new THtmlRenderer('app/resources/visualiza_cvpt_pt.html');
         } else {
             $this->html = new THtmlRenderer('app/resources/visualiza_cv.html');

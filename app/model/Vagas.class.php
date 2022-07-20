@@ -10,7 +10,7 @@ class Vagas extends TRecord
     const IDPOLICY =  'max'; // {max, serial}
     
     public $nomestatus = array("Especificando","Aberta","Concluída","Cancelada");
-    public $nometipo = array("Efetiva","Estágio");
+    public $nometipo = array("Efetiva","Estágio","Plantão");
     
     /**
      * Constructor method
